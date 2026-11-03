@@ -1,0 +1,22 @@
+name: Build rileyvr custom AssetRipper (Windows x64)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Publish
+        run: dotnet publish Source/AssetRipper.GUI.Free/AssetRipper.GUI.Free.csproj -c Release -r win-x64 -o publish
+      - name: Zip
+        shell: pwsh
+        run: Compress-Archive -Path publish\* -DestinationPath AssetRipper-rileyvr-win-x64.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: AssetRipper-rileyvr-win-x64
+          path: AssetRipper-rileyvr-win-x64.zip
