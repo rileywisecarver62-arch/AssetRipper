@@ -16,7 +16,7 @@ public abstract class DefaultPage : HtmlPage
 			{
 				new Meta(writer).WithCharset("utf-8").Close();
 				new Meta(writer).WithName("viewport").WithContent("width=device-width, initial-scale=1.0").Close();
-				new Title(writer).Close(GetTitle());
+				new Title(writer).Close($"{GetTitle()} - by rileyvr (custom build of AssetRipper)");
 				OnlineDependencies.Bootstrap.WriteStyleSheetReference(writer);
 				new Link(writer).WithRel("stylesheet").WithHref("/css/site.css").Close();
 			}
